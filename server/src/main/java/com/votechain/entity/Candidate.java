@@ -1,8 +1,6 @@
 package com.votechain.entity;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "candidate")
@@ -13,11 +11,8 @@ public class Candidate {
     private Long id;
     private String name;
     private String description;
-
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "candidate")
-    private Set<Vote> votes = new HashSet<>();
+    @Column(name = "vote_id")
+    private Long voteId;
 
     public Candidate() {
     }
@@ -46,11 +41,4 @@ public class Candidate {
         this.description = description;
     }
 
-    public Set<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Set<Vote> votes) {
-        this.votes = votes;
-    }
 }

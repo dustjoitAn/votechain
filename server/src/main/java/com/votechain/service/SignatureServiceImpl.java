@@ -3,10 +3,12 @@ package com.votechain.service;
 import com.votechain.entity.Signature;
 import com.votechain.repository.SignatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SignatureServiceImpl implements SignatureService {
 
     @Autowired

@@ -1,12 +1,7 @@
 package com.votechain.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -18,20 +13,16 @@ public class User {
     private String username;
     private String nickname;
     private String password;
+    @Column(name = "created_at")
     private Date createdAt;
+    @Column(name = "updated_at")
     private Date updatedAt;
+    @Column(name = "private_key")
     private String privateKey;
+    @Column(name = "bitcoin_address")
     private String bitcoinAddress;
     private Long role;
     private Long network;
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "code_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Code code;
-
-    @ManyToMany
-    private Set<Vote> votes;
 
     public User() {
     }
@@ -114,21 +105,5 @@ public class User {
 
     public void setNetwork(Long network) {
         this.network = network;
-    }
-
-    public Code getCode() {
-        return code;
-    }
-
-    public void setCode(Code code) {
-        this.code = code;
-    }
-
-    public Set<Vote> getVotes() {
-        return votes;
-    }
-
-    public void setVotes(Set<Vote> votes) {
-        this.votes = votes;
     }
 }

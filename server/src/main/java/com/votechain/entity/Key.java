@@ -3,18 +3,24 @@ package com.votechain.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "key")
+@Table(name = "the_keys")
 public class Key {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
      private Long id;
-     private String bitcoinPublicKey;
-     private String bitcoinPrivateKey;
-     private String bitcoinAddress;
-     private boolean isUsed;
+    @Column(name = "bitcoin_public_key")
+    private String bitcoinPublicKey;
+    @Column(name = "bitcoin_private_key")
+    private String bitcoinPrivateKey;
+    @Column(name = "bitcoin_address")
+    private String bitcoinAddress;
+    @Column(name = "is_used")
+    private String isUsed;
+    @Column(name = "used_for")
      private String usedFor;
-     private boolean isPaid;
+    @Column(name = "is_paid")
+    private String isPaid;
 
      public Long getId() {
           return id;
@@ -48,14 +54,6 @@ public class Key {
           this.bitcoinAddress = bitcoinAddress;
      }
 
-     public boolean isUsed() {
-          return isUsed;
-     }
-
-     public void setUsed(boolean used) {
-          isUsed = used;
-     }
-
      public String getUsedFor() {
           return usedFor;
      }
@@ -64,11 +62,4 @@ public class Key {
           this.usedFor = usedFor;
      }
 
-     public boolean isPaid() {
-          return isPaid;
-     }
-
-     public void setPaid(boolean paid) {
-          isPaid = paid;
-     }
 }

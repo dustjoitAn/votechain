@@ -1,11 +1,7 @@
 package com.votechain.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 @Table(name = "vote")
@@ -16,23 +12,15 @@ public class Vote {
     private Long id;
     private String title;
     private Long number;
-    private boolean isStarted;
+    @Column(name = "is_started")
+    private String isStarted;
+    @Column(name = "created_at")
     private Date createdAt;
+    @Column(name = "updated_at")
     private Date updatedAt;
     private String network;
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Candidate.class)
-    @JoinColumn(name = "candidate_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Candidate candidate;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_vote",
-            joinColumns = @JoinColumn(name = "vote_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Set<User> users;
 
     public Long getId() {
         return id;
@@ -56,14 +44,6 @@ public class Vote {
 
     public void setNumber(Long number) {
         this.number = number;
-    }
-
-    public boolean isStarted() {
-        return isStarted;
-    }
-
-    public void setStarted(boolean started) {
-        isStarted = started;
     }
 
     public Date getCreatedAt() {
@@ -98,19 +78,5 @@ public class Vote {
         this.description = description;
     }
 
-    public Candidate getCandidate() {
-        return candidate;
-    }
 
-    public void setCandidate(Candidate candidate) {
-        this.candidate = candidate;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }

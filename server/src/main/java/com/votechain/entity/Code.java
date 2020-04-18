@@ -1,12 +1,7 @@
 package com.votechain.entity;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "code")
@@ -15,17 +10,18 @@ public class Code {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private boolean isUsed;
+    private String code;
+    @Column(name = "is_used")
+    private String isUsed;
+    @Column(name = "public_key")
     private String publicKey;
+    @Column(name = "item_id")
     private Long itemId;
-
-
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = User.class)
-    @JoinColumn(name = "code_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Code code;
-
+    @Column(name = "user_id")
+    private Long userId;
+    @Column(name = "created_at")
     private Date createdAt;
+    @Column(name = "updated_at")
     private Date updatedAt;
 
     public Code() {
@@ -37,22 +33,6 @@ public class Code {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Code getCode() {
-        return code;
-    }
-
-    public void setCode(Code code) {
-        this.code = code;
-    }
-
-    public boolean isUsed() {
-        return isUsed;
-    }
-
-    public void setUsed(boolean used) {
-        isUsed = used;
     }
 
     public String getPublicKey() {
