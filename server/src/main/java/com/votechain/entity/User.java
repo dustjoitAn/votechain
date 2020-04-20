@@ -1,28 +1,52 @@
 package com.votechain.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String username;
+
     private String nickname;
+
     private String password;
+
     @Column(name = "created_at")
     private Date createdAt;
+
     @Column(name = "updated_at")
     private Date updatedAt;
+
     @Column(name = "private_key")
     private String privateKey;
+
     @Column(name = "bitcoin_address")
     private String bitcoinAddress;
+
     private Long role;
+
     private Long network;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Code> codes;
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "user_vote",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "vote_id")
+    )
+    private List<Vote> votes = new ArrayList<>();
 
     public User() {
     }

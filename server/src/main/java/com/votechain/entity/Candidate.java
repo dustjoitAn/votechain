@@ -3,16 +3,19 @@ package com.votechain.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "candidate")
 public class Candidate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String description;
-    @Column(name = "vote_id")
-    private Long voteId;
+
+    @ManyToOne
+    @JoinColumn(name = "vote_id")
+    private Vote vote;
 
     public Candidate() {
     }

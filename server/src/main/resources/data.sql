@@ -118,3 +118,4 @@ INSERT INTO vote(id, title, number, is_started, created_at, updated_at, network,
 ('3', 'A test voting', '2', '1', '2017-08-09 02:23:55', '2017-08-09 02:23:55', null, 'A test for voting'),
 ('4', 'Test', '10', '1', '2017-08-09 02:23:55', '2017-08-09 02:23:55', '', 'Test!!!'),
 ('5', 'A test voting for demo', '2', '1', '2017-08-09 02:23:55', '2017-08-09 02:23:55', null, null);
+

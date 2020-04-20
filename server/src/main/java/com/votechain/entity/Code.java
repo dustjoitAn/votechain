@@ -4,23 +4,30 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "code")
 public class Code {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String code;
+
     @Column(name = "is_used")
     private String isUsed;
+
     @Column(name = "public_key")
     private String publicKey;
+
     @Column(name = "item_id")
     private Long itemId;
-    @Column(name = "user_id")
-    private Long userId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @Column(name = "created_at")
     private Date createdAt;
+
     @Column(name = "updated_at")
     private Date updatedAt;
 
